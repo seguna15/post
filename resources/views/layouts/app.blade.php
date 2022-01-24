@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Post') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Posts') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -52,6 +52,18 @@
                                 </li>
                             @endif
                         @else
+                            @can('user-list')
+                                <li><a href="{{ route('users.index') }}" class="nav-link">Users</a></li>
+                            @endcan
+                            @can('role-list')
+                                <li><a href="{{route('roles.index')}}" class="nav-link">Roles</a></li>
+                            @endcan
+                            @can('permission-list')
+                                <li><a href="{{route('permissions.index')}}" class="nav-link">Permissions</a></li>
+                            @endcan
+                            @can('post-list')
+                                <li><a href="{{route('posts.index')}}" class="nav-link">Posts</a></li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

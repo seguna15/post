@@ -31,7 +31,7 @@ class RoleController extends Controller
     {
         $data = Role::orderBy('id', 'DESC')->paginate(5);
 
-        return view('role.index', compact('data'));
+        return view('roles.index', compact('data'));
     }
 
     /**
@@ -75,7 +75,7 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        $rolePermissions = Permission::join('role_has_permissions', 'role_has_permissions_id', 'permissions.id')
+        $rolePermissions = Permission::join('role_has_permissions', 'role_has_permissions.permissions.id', 'permissions.id')
             ->where('role_has_permissions.role_id', $id)
             ->get();
 
